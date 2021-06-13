@@ -41,14 +41,14 @@ jobs:
         cd builddir
         ninja -v test
 
-  libintltestalaschwartz:
+  libintl:
     runs-on: macos-latest
     env:
       TERM: xterm
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-    - run: |
+      run: |
         brew update
         brew unlink gettext && brew link --force gettext
         brew install ncurses ninja
