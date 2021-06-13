@@ -41,7 +41,7 @@ jobs:
         cd builddir
         ninja -v test
 
-  libintl_test_ala_schwartz:
+  libintltestalaschwartz:
     runs-on: macos-latest
     env:
       TERM: xterm
