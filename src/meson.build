@@ -22,5 +22,5 @@ dep_librmw = static_library(
   'rmw',
   src,
   include_directories : ['..', '../external/canfigger'],
-  dependencies: [dep_menu, dep_curses, intl],
+  dependencies: [dep_intl, dep_menu, dep_curses]
   )
