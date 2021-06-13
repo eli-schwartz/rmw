@@ -26,7 +26,7 @@ echo $output
 echo $SEPARATOR
 echo " Creating some files for testing..."
 cd ${RMW_FAKE_HOME}
-${TESTS_DIR}/create-some-files.sh
+create_some_files
 
 echo $SEPARATOR
 echo "Try to restore files that aren't in a Waste/files folder"

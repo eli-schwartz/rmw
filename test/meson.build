@@ -1,17 +1,11 @@
 vg = find_program('valgrind', required : false)
 
-# This is only set when running under Valgrind test setup.
-#env = environment()
-#env.set('VALGRIND', ['valgrind', '--error-exitcode=1', '--leak-check=full'])
-
 if vg.found()
-add_test_setup('valgrind',
-  exe_wrapper : ['../test/valgrind_wrap.sh'],
-#  env : env
-  )
+  add_test_setup(
+    'valgrind',
+    exe_wrapper : ['../test/valgrind_wrap.sh']
+    )
 endif
-
-#add_test_setup('scripts', exe_wrapper : ['emulator', '--script'])
 
 test_cases = [
   'strings_rmw',
