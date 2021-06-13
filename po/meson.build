@@ -1,4 +1,4 @@
-libintl = dependency('', required: false)
+intl = dependency('', required: false)
 if get_option('enable-nls')
   i18n = import('i18n')
 
