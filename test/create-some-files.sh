@@ -1,10 +1,5 @@
 #!/bin/sh
 
-if [ ! -e @abs_builddir@/VARS ]; then
-  echo "This script shouldn't be run by itself. It's used by make check."
-  exit 1
-fi
-
 mkdir -p somefiles/topdir/dir1/dir2/dir3 || exit $?
 
 c=1

@@ -18,11 +18,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install -y gettext
-    - run: ./configure
-    - run: make
-    - run: make check
-    - run: make distcheck
+      run: sudo apt-get install -y gettext meson
+    - run: |
+        meson builddir
+        cd builddir
+        ninja -v test
+
   macos:
     runs-on: macos-latest
     env:
@@ -30,9 +31,8 @@ jobs:
       TERM: xterm
     steps:
     - uses: actions/checkout@v2
-    - run: brew install ncurses
-    - name: Configure
-      run: ./configure --disable-nls
-    - run: make
-    - name: Make distcheck
-      run:  make distcheck
+    - run: brew install ncurses meson
+    - run: |
+        meson builddir
+        cd builddir
+        ninja -v test

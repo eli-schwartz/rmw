@@ -1,5 +1,18 @@
 # included by tests scripts
 
+if test -z "${MESON_BUILD_ROOT}" || test -z "${RMW_FAKE_HOME}"; then
+  echo "This script is used by the build system. Use 'ninja test' or
+  echo 'meson test --setup=valgrind' from the builddir."
+  exit 1
+fi
+
+RMW_FAKE_HOME=${RMW_FAKE_HOME}/$(basename $0)_dir
+TESTS_DIR="${MESON_SOURCE_ROOT}/test"
+CONFIG="${MESON_SOURCE_ROOT}/test/rmw.testrc"
+ALT_CONFIG="${MESON_SOURCE_ROOT}/test/rmw.alt.testrc"
+PURGE_DISABLED_CONFIG="${MESON_SOURCE_ROOT}/test/rmw.purge_disabled.testrc"
+BIN_DIR="${MESON_BUILD_ROOT}"
+
 export RMW_FAKE_HOME
 
 if [ -e ${RMW_FAKE_HOME} ]; then

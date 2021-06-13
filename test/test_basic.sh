@@ -1,11 +1,9 @@
 #!/bin/sh
 
-. @abs_builddir@/VARS
-
 if [ -e COMMON ]; then
   . ./COMMON
 else
-  . @abs_top_srcdir@/test/COMMON
+  . "${MESON_SOURCE_ROOT}/test/COMMON"
 fi
 
 echo "== On first run, directories should get created"
@@ -19,9 +17,9 @@ output="$($RMW_TEST_CMD_STRING -l)"
 echo "${output}"
 test "${output}" = "/mnt/fs/Trash-$(id -u)
 /mnt/sda10000/example_waste
-@abs_top_builddir@/test/rmw-tests-home/test_basic.sh_dir/.Waste
-@abs_top_builddir@/test/rmw-tests-home/test_basic.sh_dir/.local/share/Waste-2
-@abs_top_builddir@/test/rmw-tests-home/test_basic.sh_dir/.local/share/Waste-3"
+"${MESON_BUILD_ROOT}"/test/rmw-tests-home/test_basic.sh_dir/.Waste
+"${MESON_BUILD_ROOT}"/test/rmw-tests-home/test_basic.sh_dir/.local/share/Waste-2
+"${MESON_BUILD_ROOT}"/test/rmw-tests-home/test_basic.sh_dir/.local/share/Waste-3"
 
 echo $SEPARATOR
 

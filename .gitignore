@@ -54,10 +54,8 @@ extract_strings.sh
 
 autom4te.cache
 test/tmp-home
-/rmw.geany
 /po/Makevars.template
 /po/Makefile.in
-/po/POTFILES
 
 # coverity
 cov-int
@@ -69,8 +67,5 @@ cov-int
 temp_install
 build
 _build
-
-# Doxygen
-doxy-warn.log
 
 

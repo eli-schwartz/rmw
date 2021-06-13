@@ -5,12 +5,10 @@
 # new users, and for testing for bugs
 #
 
-. @abs_builddir@/VARS
-
 if [ -e COMMON ]; then
   . ./COMMON
 else
-  . @abs_top_srcdir@/test/COMMON
+  . "${MESON_SOURCE_ROOT}/test/COMMON"
 fi
 
 echo "== On first run, directories should get created"
@@ -43,7 +41,7 @@ echo
 echo
 echo " Creating some files for testing..."
 cd ${RMW_FAKE_HOME}
-@abs_builddir@/create-some-files.sh
+${TESTS_DIR}/create-some-files.sh
 
 echo
 echo
@@ -145,7 +143,7 @@ echo
 echo
 echo " Creating some files for testing..."
 cd ${RMW_FAKE_HOME}
-@abs_builddir@/create-some-files.sh
+${TESTS_DIR}/create-some-files.sh
 
 echo $SEPARATOR
 echo " == rmw should be able to purge directories and subdirectories"

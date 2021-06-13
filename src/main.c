@@ -470,8 +470,8 @@ main (const int argc, char *const argv[])
 {
 #ifdef ENABLE_NLS
   setlocale (LC_ALL, "");
-  bindtextdomain (PACKAGE, LOCALEDIR);
-  textdomain (PACKAGE);
+  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+  textdomain (GETTEXT_PACKAGE);
 #endif
 
   rmw_options cli_user_options;

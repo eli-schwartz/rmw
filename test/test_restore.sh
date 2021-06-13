@@ -5,13 +5,12 @@
 # new users, and to test for bugs when making code changes
 #
 
-. @abs_builddir@/VARS
-
 if [ -e COMMON ]; then
   . ./COMMON
 else
-  . @abs_top_srcdir@/test/COMMON
+  . "${MESON_SOURCE_ROOT}/test/COMMON"
 fi
+
 
 echo $SEPARATOR
 echo "Initialize"
@@ -27,7 +26,7 @@ echo $output
 echo $SEPARATOR
 echo " Creating some files for testing..."
 cd ${RMW_FAKE_HOME}
-@abs_builddir@/create-some-files.sh
+${TESTS_DIR}/create-some-files.sh
 
 echo $SEPARATOR
 echo "Try to restore files that aren't in a Waste/files folder"
@@ -120,7 +119,7 @@ fi
 # /dev/sda7 on /mnt/sda7 type ext4 (rw,relatime)
 # /dev/sda7 on /home/andy/src type ext4 (rw,relatime)
 
-if test -f "@abs_builddir@/4507107f3ff0df740c7699fb9dc4cecc041c59c9"; then
+if test -f "${MESON_BUILD_ROOT}/test/4507107f3ff0df740c7699fb9dc4cecc041c59c9"; then
   test_file="media_root_test"
   PREV_RMW_FAKE_HOME=${RMW_FAKE_HOME}
   # needs to be unset so rmw will use $HOME instead
@@ -141,11 +140,11 @@ if test -f "@abs_builddir@/4507107f3ff0df740c7699fb9dc4cecc041c59c9"; then
   output=$(grep Path /home/andy/src/.Trash-1000/info/$test_file.trashinfo)
   echo $SEPARATOR
   # There should be no leading '/' in the filename.
-  test "$output" = "Path=rmw-project/_build/test/rmw-tests-home/test_restore.sh_dir/media_root_test"
+  test "$output" = "Path=rmw-project/rmw/builddir/test/rmw-tests-home/test_restore.sh_dir/media_root_test"
   echo $SEPARATOR
   output=$($BIN_DIR/rmw -uvv -c /home/andy/.config/rmwrc | grep media_root_test)
   echo $SEPARATOR
-  test "$output" = "+'/home/andy/src/.Trash-1000/files/media_root_test' -> '/home/andy/src/rmw-project/_build/test/rmw-tests-home/test_restore.sh_dir/media_root_test'
+  test "$output" = "+'/home/andy/src/.Trash-1000/files/media_root_test' -> '${MESON_BUILD_ROOT}/test/rmw-tests-home/test_restore.sh_dir/media_root_test'
 -/home/andy/src/.Trash-1000/info/media_root_test.trashinfo"
 fi
 

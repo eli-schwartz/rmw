@@ -133,16 +133,16 @@ before_install:
   - echo $CC
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       eval "${MATRIX_EVAL}";
+      sudo apt-get install -y meson;
       if [ -n "$MATRIX_EVAL" ] && [ "$TRAVIS_COMPILER" != "clang" ] && [ "$CC" != "gcc-9" ] && [ "$CC" != "gcc-10" ]; then
         sudo apt-get install -y $CC;
       fi;
       if [ "$USE_VALGRIND" = "true" ]; then
-        CONFIGURE_OPTS="${CONFIGURE_OPTS} --enable-valgrind";
+        CONFIGURE_OPTS="${CONFIGURE_OPTS} test --setup=valgrind";
         sudo apt-get install -y valgrind;
       fi;
     else
-      brew install ncurses &&
-      export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig";
+      brew install ncurses meson
     fi
   - export CONFIGURE_OPTS
   - export DISTCHECK_ONLY
