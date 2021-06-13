@@ -57,6 +57,3 @@ jobs:
         meson builddir
         cd builddir
         ninja -v test
-
-
-
