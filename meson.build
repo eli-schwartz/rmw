@@ -41,22 +41,8 @@ foreach h : check_headers
 	endif
 endforeach
 
-config_h = configure_file(output : 'config.h', configuration : conf)
-
-
-if host_machine.system() == 'linux' or host_machine.system() == 'gnu'
-	gettext_deps = []
-elif host_machine.system() == 'freebsd' or host_machine.system() == 'openbsd' or host_machine.system() == 'dragonfly'
-	# Workaround for https://github.com/mesonbuild/meson/issues/4468
-	gettext_deps = [cc.find_library('intl', has_headers: ['libintl.h'], dirs: ['/usr/local/lib'], header_args: c_args)]
-elif host_machine.system() == 'netbsd'
-	# Workaround for https://github.com/mesonbuild/meson/issues/4468
-	gettext_deps = [cc.find_library('intl', has_headers: ['libintl.h'], dirs: ['/usr/pkg/lib'], header_args: c_args)]
-else # darwin, cygwin
-	gettext_deps = [cc.find_library('intl', has_headers: ['libintl.h'])]
-endif
-
 subdir('po')
+config_h = configure_file(output : 'config.h', configuration : conf)
 subdir('external/canfigger')
 
 subdir('src')
