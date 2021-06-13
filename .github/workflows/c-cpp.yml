@@ -33,8 +33,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        brew update
-        brew unlink gettext && brew link --force gettext
         find /usr -name libintl* -print 2>/dev/null
         brew install ncurses meson
     - run: |
