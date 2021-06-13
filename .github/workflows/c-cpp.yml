@@ -28,11 +28,14 @@ jobs:
   macos:
     runs-on: macos-latest
     env:
-      PKG_CONFIG_PATH: "/usr/local/opt/ncurses/lib/pkgconfig"
+      PKG_CONFIG_PATH: "/usr/local/opt/ncurses/lib/pkgconfig:$PKG_CONFIG_PATH"
       TERM: xterm
     steps:
     - uses: actions/checkout@v2
-    - run: brew install ncurses meson
+    - run: |
+        brew update
+        brew unlink gettext && brew link --force gettext
+        brew install ncurses meson
     - run: |
         meson builddir
         cd builddir
