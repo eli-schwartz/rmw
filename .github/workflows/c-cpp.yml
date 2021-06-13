@@ -18,7 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install -y gettext meson
+      run: sudo apt-get install -y gettext
+    - run: sudo python3 -m pip install meson ninja
     - run: |
         meson builddir
         cd builddir
@@ -31,7 +32,7 @@ jobs:
       TERM: xterm
     steps:
     - uses: actions/checkout@v2
-    - run: brew install ncurses meson
+    - run: brew install gettext ncurses meson
     - run: |
         meson builddir
         cd builddir

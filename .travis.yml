@@ -133,7 +133,7 @@ before_install:
   - echo $CC
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       eval "${MATRIX_EVAL}";
-      sudo apt-get install -y meson;
+      sudo python3 -m pip install meson ninja;
       if [ -n "$MATRIX_EVAL" ] && [ "$TRAVIS_COMPILER" != "clang" ] && [ "$CC" != "gcc-9" ] && [ "$CC" != "gcc-10" ]; then
         sudo apt-get install -y $CC;
       fi;
@@ -142,7 +142,7 @@ before_install:
         sudo apt-get install -y valgrind;
       fi;
     else
-      brew install ncurses meson
+      brew install gettext ncurses meson
     fi
   - export CONFIGURE_OPTS
   - export DISTCHECK_ONLY

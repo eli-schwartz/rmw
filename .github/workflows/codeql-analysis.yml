@@ -39,7 +39,9 @@ jobs:
         # pull request then we can checkout the head.
         fetch-depth: 2
     - name: Install dependencies
-      run: sudo apt-get install -y gettext meson
+      run: |
+        sudo apt-get install -y gettext meson
+        sudo python3 -m pip install meson ninja
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -67,7 +69,6 @@ jobs:
         meson builddir
         cd builddir
         ninja test
-        meson test --setup=valgrind
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1

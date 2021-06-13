@@ -20,18 +20,18 @@ export TERM=xterm
 r=0
 if [ -z "$DISTCHECK_ONLY" ]; then
   ninja -v;
-  ninja test || r=$?
+  ninja test || r=$?;
   if test "x$r" != "x0"; then
-    cat ./meson-logs/testlog.txt
+    cat ./meson-logs/testlog.txt;
   fi
 else
   ninja -v dist || r=$?
   if test "x$r" != "x0"; then
-    cat ./test/test-suite.log
+    cat ./test/test-suite.log;
   fi
 fi
 if test "x$r" = "x0"; then
-  ninja clean
+  ninja clean;
 else
   rm -rf ./test;
 fi
