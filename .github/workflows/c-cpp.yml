@@ -32,7 +32,10 @@ jobs:
       TERM: xterm
     steps:
     - uses: actions/checkout@v2
-    - run: brew install gettext ncurses meson
+    - run: |
+        brew update
+        brew unlink gettext && brew link --force gettext
+        brew install ncurses meson
     - run: |
         meson builddir
         cd builddir
