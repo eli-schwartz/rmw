@@ -32,9 +32,7 @@ jobs:
       TERM: xterm
     steps:
     - uses: actions/checkout@v2
-    - run: |
-        find /usr -name libintl* -print 2>/dev/null
-        brew install ncurses meson
+    - run: brew install ncurses meson
     - run: |
         meson builddir
         cd builddir
