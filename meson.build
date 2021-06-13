@@ -10,11 +10,11 @@ add_global_arguments(
   language : 'c'
   )
 
-compiler = meson.get_compiler('c')
-if compiler.has_argument('-fstack-protector-strong')
+cc = meson.get_compiler('c')
+if cc.has_argument('-fstack-protector-strong')
   add_project_arguments('-fstack-protector-strong', language: 'c')
 endif
-if compiler.has_argument('-fanalyzer')
+if cc.has_argument('-fanalyzer')
   add_project_arguments('-fanalyzer', language: 'c')
 endif
 
@@ -36,7 +36,7 @@ check_headers = [
 ]
 
 foreach h : check_headers
-	if compiler.has_header(h.get(0))
+	if cc.has_header(h.get(0))
 		conf.set(h.get(1), 1)
 	endif
 endforeach
@@ -48,12 +48,12 @@ if host_machine.system() == 'linux' or host_machine.system() == 'gnu'
 	gettext_deps = []
 elif host_machine.system() == 'freebsd' or host_machine.system() == 'openbsd' or host_machine.system() == 'dragonfly'
 	# Workaround for https://github.com/mesonbuild/meson/issues/4468
-	gettext_deps = [cpp.find_library('intl', has_headers: ['libintl.h'], dirs: ['/usr/local/lib'], header_args: c_args)]
+	gettext_deps = [cc.find_library('intl', has_headers: ['libintl.h'], dirs: ['/usr/local/lib'], header_args: c_args)]
 elif host_machine.system() == 'netbsd'
 	# Workaround for https://github.com/mesonbuild/meson/issues/4468
-	gettext_deps = [cpp.find_library('intl', has_headers: ['libintl.h'], dirs: ['/usr/pkg/lib'], header_args: c_args)]
+	gettext_deps = [cc.find_library('intl', has_headers: ['libintl.h'], dirs: ['/usr/pkg/lib'], header_args: c_args)]
 else # darwin, cygwin
-	gettext_deps = [cpp.find_library('intl', has_headers: ['libintl.h'])]
+	gettext_deps = [cc.find_library('intl', has_headers: ['libintl.h'])]
 endif
 
 subdir('po')
