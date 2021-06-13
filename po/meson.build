@@ -2,8 +2,9 @@ libintl = dependency('', required: false)
 if get_option('enable-nls')
   i18n = import('i18n')
   if not cc.has_function('ngettext')
-    libintl = cc.find_library('intl', required : false)
-    if not libintl.found()
+    #libintl = cc.find_library('intl', required : false)
+    intl = dependency('intl', required: get_option('enable-nls'))
+    if not intl.found()
       error('ngettext not found but NLS support requested')
     endif
   endif

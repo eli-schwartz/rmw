@@ -40,3 +40,21 @@ jobs:
         meson builddir
         cd builddir
         ninja -v test
+
+  libintl_test_ala_schwartz:
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get install -y gettext
+    - run: python3 -m pip install --user ninja
+    - run: python3 -m pip install --user git+https://github.com/eli-schwartz/meson.git@82611e596563a8ecd0048d769e4083ab504a4ca2#egg=meson
+    - run: |
+        meson.py builddir
+        cd builddir
+        ninja -v test
+
+
+
