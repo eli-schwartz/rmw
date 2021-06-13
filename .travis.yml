@@ -135,7 +135,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       eval "${MATRIX_EVAL}";
       sudo apt install python3-pip;
-      sudo python3 -m pip install meson ninja;
+      python3 -m pip install --user meson ninja;
       if [ -n "$MATRIX_EVAL" ] && [ "$TRAVIS_COMPILER" != "clang" ] && [ "$CC" != "gcc-9" ] && [ "$CC" != "gcc-10" ]; then
         sudo apt-get install -y $CC;
       fi;
