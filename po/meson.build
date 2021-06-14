@@ -1,11 +1,11 @@
 dep_intl = dependency('', required: false)
 if get_option('enable-nls')
-  i18n = import('i18n')
-
   #libintl = cc.find_library('intl', required : false)
-  dep_intl = dependency('intl', required: get_option('enable-nls'))
-  if not dep_intl.found()
-    error('ngettext not found but NLS support requested')
+  if host_machine.system() != 'linux' and host_machine.system() != 'gnu'
+    dep_intl = dependency('intl', required: true)
+    if not dep_intl.found()
+      error('ngettext not found but NLS support requested')
+    endif
   endif
 
   conf.set('ENABLE_NLS', 1)
@@ -14,6 +14,7 @@ if get_option('enable-nls')
 
   # define GETTEXT_PACKAGE
   add_project_arguments('-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()), language:'c')
+  i18n = import('i18n')
   i18n.gettext(meson.project_name(),
     args: ['--directory=' + meson.source_root(), '--sort-output'])
 endif
