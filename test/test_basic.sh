@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ve
 
 if [ -e COMMON ]; then
   . ./COMMON

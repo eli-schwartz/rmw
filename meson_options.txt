@@ -1,5 +1,5 @@
-option('buildstatic', type : 'boolean', value : false,
-       description : 'if true, build statically linked binaries')
-
 option('enable-nls', type : 'boolean', value : true,
        description : 'include native language support and install language files')
+
+option('docdir', type : 'string', value : 'share/doc/rmw',
+       description : 'directory where the documentation should be installed to')

@@ -1,7 +1,5 @@
 # included by tests scripts
 
-set -ve
-
 create_some_files() {
 mkdir -p somefiles/topdir/dir1/dir2/dir3
 

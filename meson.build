@@ -17,6 +17,12 @@ endif
 if cc.has_argument('-fanalyzer')
   add_project_arguments('-fanalyzer', language: 'c')
 endif
+if cc.has_argument('-Wformat-security')
+  add_project_arguments('-Wformat-security', language: 'c')
+endif
+if cc.has_argument('-Wformat-overflow=2')
+  add_project_arguments('-Wformat-overflow=2', language: 'c')
+endif
 
 conf = configuration_data()
 conf.set_quoted('VERSION', meson.project_version())
@@ -25,20 +31,20 @@ conf.set_quoted('PACKAGE_URL', 'https://remove-to-waste.info/')
 conf.set_quoted('PACKAGE_BUGREPORT', 'https://github.com/theimpossibleastronaut/rmw/issues')
 
 check_headers = [
-	['ncursesw/menu.h', 'HAVE_NCURSESW_MENU_H'],
-	['ncurses/menu.h', 'HAVE_NCURSES_MENU_H'],
-	['menu.h', 'HAVE_MENU_H'],
-	['ncursesw/curses.h', 'HAVE_NCURSESW_CURSES_H'],
-	['ncursesw.h', 'HAVE_NCURSESW_H'],
-	['ncurses/curses.h', 'HAVE_NCURSES_CURSES_H'],
-	['ncurses.h', 'HAVE_NCURSES_H'],
-	['curses.h', 'HAVE_CURSES_H'],
+  ['ncursesw/menu.h', 'HAVE_NCURSESW_MENU_H'],
+  ['ncurses/menu.h', 'HAVE_NCURSES_MENU_H'],
+  ['menu.h', 'HAVE_MENU_H'],
+  ['ncursesw/curses.h', 'HAVE_NCURSESW_CURSES_H'],
+  ['ncursesw.h', 'HAVE_NCURSESW_H'],
+  ['ncurses/curses.h', 'HAVE_NCURSES_CURSES_H'],
+  ['ncurses.h', 'HAVE_NCURSES_H'],
+  ['curses.h', 'HAVE_CURSES_H'],
 ]
 
 foreach h : check_headers
-	if cc.has_header(h.get(0))
-		conf.set(h.get(1), 1)
-	endif
+  if cc.has_header(h.get(0))
+    conf.set(h.get(1), 1)
+  endif
 endforeach
 
 subdir('po')
@@ -56,3 +62,8 @@ executable(
 
 subdir ('man')
 subdir ('test')
+
+# TODO:
+# prefix will be prepended to docdir if docdir gets changed
+install_data(files('README.md', 'COPYING', 'AUTHORS.md', 'ChangeLog', 'ReleaseNotes'),
+        install_dir : get_option('docdir'))

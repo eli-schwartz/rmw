@@ -3,7 +3,7 @@ vg = find_program('valgrind', required : false)
 if vg.found()
   add_test_setup(
     'valgrind',
-    exe_wrapper : ['../test/valgrind_wrap.sh']
+    exe_wrapper : [meson.source_root() + '/test/valgrind_wrap.sh']
     )
 endif
 

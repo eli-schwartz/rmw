@@ -4,6 +4,7 @@
 # This script can be used to demonstrate the purging feature of rmw to
 # new users, and for testing for bugs
 #
+set -ve
 
 if [ -e COMMON ]; then
   . ./COMMON

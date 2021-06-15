@@ -4,13 +4,13 @@
 # This script can be used to demonstrate the restore features of rmw to
 # new users, and to test for bugs when making code changes
 #
+set -ve
 
 if [ -e COMMON ]; then
   . ./COMMON
 else
   . "${MESON_SOURCE_ROOT}/test/COMMON"
 fi
-
 
 echo $SEPARATOR
 echo "Initialize"
