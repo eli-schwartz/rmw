@@ -18,8 +18,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install -y gettext
-    - run: sudo python3 -m pip install meson ninja
+      run: |
+        sudo apt-get install -y gettext
+        sudo python3 -m pip install ninja
+        sudo -H python3 -m pip install git+https://github.com/eli-schwartz/meson.git@intl-dep#egg=meson
     - run: |
         meson builddir
         cd builddir
@@ -33,23 +35,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        brew update
-        brew unlink gettext && brew link --force gettext
-        brew install ncurses meson
-    - run: |
-        meson builddir
-        cd builddir
-        ninja -v test
-
-  libintl:
-    runs-on: macos-latest
-    env:
-      PKG_CONFIG_PATH: "/usr/local/opt/ncurses/lib/pkgconfig:$PKG_CONFIG_PATH"
-      TERM: xterm
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
         brew update
         brew unlink gettext && brew link --force gettext
         brew install ncurses ninja
