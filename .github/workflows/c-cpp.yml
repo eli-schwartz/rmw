@@ -40,6 +40,9 @@ jobs:
         brew install ncurses ninja
         sudo -H python3 -m pip install git+https://github.com/eli-schwartz/meson.git@intl-dep#egg=meson
     - run: |
-        meson builddir
+        if ! meson builddir; then
+            cat builddir/meson-logs/meson-log.txt
+            exit 1
+        fi
         cd builddir
         ninja -v test
