@@ -1,4 +1,4 @@
-dep_intl = dependency('intl', required: get_option('enable-nls'), static: true)
+dep_intl = dependency('intl', required: get_option('enable-nls'), static: false)
 if dep_intl.found()
   conf.set('ENABLE_NLS', 1)
 
