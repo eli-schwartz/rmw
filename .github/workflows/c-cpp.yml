@@ -38,6 +38,7 @@ jobs:
         brew update
         brew unlink gettext && brew link --force gettext
         brew install ncurses ninja
+        brew list -v gettext
         sudo -H python3 -m pip install git+https://github.com/eli-schwartz/meson.git@intl-dep#egg=meson
     - run: |
         if ! meson builddir; then
